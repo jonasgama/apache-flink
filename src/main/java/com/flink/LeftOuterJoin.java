@@ -1,4 +1,4 @@
-package flink.tutorials;
+package com.flink;
 
 import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.common.functions.MapFunction;
@@ -8,7 +8,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.utils.ParameterTool;
 
-public class Join
+public class LeftOuterJoin
 {
     public static void main(String[] args)
             throws Exception
@@ -28,20 +28,23 @@ public class Join
         //inner join
         //where 0 is the same as first field of the person.txt
         //equal to 0 is the same as the first field of the location.txt
-        DataSet<Tuple3<Integer,String, String>> joined = persons.join(locations)
+        DataSet<Tuple3<Integer,String, String>> joined = persons.leftOuterJoin(locations)
         .where(0).equalTo(0)
                 //overriding the output manually
                 .with(new JoinFunction<Tuple2<Integer, String>, Tuple2<Integer, String>, Tuple3<Integer, String, String>>() {
                     @Override
                     public Tuple3<Integer, String, String> join(Tuple2<Integer, String> person, Tuple2<Integer, String> location) throws Exception {
                         //id person.txt, name person.txt, location.txt name
+                        if(location==null){
+                            return new Tuple3<>(person.f0, person.f1, "null");
+                        }
                         return new Tuple3<>(person.f0, person.f1, location.f1);
                     }
                 });
 
-        joined.writeAsCsv(params.get("output"), "\n", " ");
+        joined.writeAsCsv(params.get("output")).setParallelism(1);
 
-        env.execute("Join Example");
+        env.execute("Left outer join example");
 
     }
 
