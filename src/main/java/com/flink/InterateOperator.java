@@ -21,7 +21,7 @@ public class InterateOperator {
         //as a graph all the edge cases must be covered.
 
         //generating data source
-        DataStream<Tuple2<Long,Integer>> data = env.fromSequence(0, 5)
+        DataStream<Tuple2<Long,Integer>> data = env.fromSequence(0, 4)
             .map(new MapFunction<Long, Tuple2<Long, Integer>>() {
                 public Tuple2<Long, Integer> map(Long value) {
                     //initialize as 0 iterations
