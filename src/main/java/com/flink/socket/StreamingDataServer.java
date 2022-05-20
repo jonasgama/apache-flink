@@ -1,4 +1,4 @@
-package com.flink;
+package com.flink.socket;
 
 import java.io.IOException;
 import java.io.PrintWriter;

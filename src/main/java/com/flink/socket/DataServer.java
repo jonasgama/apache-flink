@@ -1,4 +1,4 @@
-package com.flink;
+package com.flink.socket;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

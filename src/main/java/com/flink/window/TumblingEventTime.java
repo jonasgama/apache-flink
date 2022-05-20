@@ -1,4 +1,4 @@
-package com.flink;
+package com.flink.window;
 
 import org.apache.flink.api.common.eventtime.AscendingTimestampsWatermarks;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
