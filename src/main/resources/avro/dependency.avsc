@@ -1,0 +1,10 @@
+{
+  "namespace": "com.flink.kafka.avro",
+  "type": "record",
+  "name": "Dependency",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "batchSize", "type": "long"},
+    {"name": "otherField", "type": "long"}
+  ]
+}
