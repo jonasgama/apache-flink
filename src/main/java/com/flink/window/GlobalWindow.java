@@ -26,6 +26,7 @@ public class GlobalWindow {
                 .window(GlobalWindows.create())
                 .trigger(CountTrigger.of(5))
                 .reduce(new Reduce1());
+
         reduced.addSink(StreamingFileSink
                 .forRowFormat(new Path("/Users/jonasgama/Documents/repos/apache-flink/avg"),
                         new SimpleStringEncoder< Tuple5 < String, String, String, Integer, Integer >>("UTF-8"))
